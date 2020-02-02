@@ -66,6 +66,7 @@ class AdminLoginPage extends Vue {
                     if(this.email == 'raphael@vsoft.com.br' && this.senha == '1234') {
                         this.isBusy = true;
                         const vm = this;
+                        localStorage.setItem('logged', 'true');
                         setTimeout(() => {
                             this.$router.push('dashboard');
                         }, 2000);
@@ -77,6 +78,7 @@ class AdminLoginPage extends Vue {
                 }
             });
     }
+    
     private email: string = '';
     private senha: string = '';
 }

@@ -11,7 +11,7 @@
                 <span>
                     Bem-vindo, Raphael
                 </span>
-                <button class="conteudo__header__sair" @click="$router.push({ name: 'login'})">
+                <button class="conteudo__header__sair" @click="logout()">
                     Sair
                 </button>
             </header>
@@ -44,7 +44,18 @@ import PieChart from '@/charts/PieChart';
 
 @Component({ components: { LineChart, PieChart } })
 class DashboardPage extends Vue {
+    
+    private beforeCreate(): void {
+        const isLogged: boolean = Boolean(localStorage.getItem('logged'));
+        if(!isLogged) {
+            this.$router.replace({name: 'login'});
+        }
+    }
 
+    private logout(): void {
+        localStorage.removeItem('logged');
+        this.$router.replace({ name: 'login'});
+    }
     private dataCollection = {
         labels: [25, 30],
         datasets: [
